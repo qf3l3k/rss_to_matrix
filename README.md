@@ -2,6 +2,10 @@
 
 A small self-hosted RSS/Atom notifier for Matrix rooms.
 
+<a href="https://buymeacoffee.com/qf3l3k">
+  <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee" width="180">
+</a>
+
 `rss-to-matrix` polls configured feeds, records seen entries in SQLite, strips
 noisy feed HTML, and posts clean messages through the Matrix Client API. It is
 designed for native Debian/systemd deployment without Docker or Poetry.
