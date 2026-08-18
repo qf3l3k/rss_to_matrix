@@ -1,6 +1,12 @@
+include:
+  - project: templates/ci-templates
+    ref: v1.0.0
+    file: /.gitlab/github-mirror.yml
+
 stages:
   - quality
   - package
+  - mirror
 
 variables:
   # Every job gets an isolated checkout and virtualenv on the selected runner.
@@ -40,3 +46,7 @@ package:
   artifacts:
     paths:
       - dist/
+
+# The included mirror job only needs Git; skip the Python project bootstrap.
+github_mirror_publish:
+  before_script: []
