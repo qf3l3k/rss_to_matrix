@@ -1,0 +1,35 @@
+# RSS to Matrix configuration
+
+homeserver = "https://matrix.example.com"
+access_token = "PASTE_RSS_BOT_ACCESS_TOKEN_HERE"
+state_db = "/var/lib/rss-to-matrix/state.sqlite3"
+
+[network]
+connect_timeout_seconds = 5
+read_timeout_seconds = 20
+max_attempts = 5
+retry_backoff_seconds = 1
+max_retry_delay_seconds = 60
+user_agent = "rss-to-matrix/0.1.0"
+
+[[feed]]
+# Stable state identity. Do not change after the feed has been deployed.
+id = "example-news"
+name = "Example News"
+url = "https://feeds.example.com/news.xml"
+room_id = "!PASTE_ROOM_ID_HERE:matrix.example.com"
+enabled = true
+max_entries_per_run = 3
+post_delay_seconds = 5
+summary_max_chars = 500
+
+[[feed]]
+# Display names may change, but IDs must remain stable.
+id = "matrix-blog"
+name = "Matrix Blog"
+url = "https://feeds.example.com/matrix-blog.xml"
+room_id = "!PASTE_ROOM_ID_HERE:matrix.example.com"
+enabled = false
+max_entries_per_run = 3
+post_delay_seconds = 5
+summary_max_chars = 500

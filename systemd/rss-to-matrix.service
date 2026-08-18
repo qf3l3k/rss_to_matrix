@@ -1,0 +1,43 @@
+[Unit]
+Description=RSS to Matrix notifier
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=rss-to-matrix
+Group=rss-to-matrix
+
+Environment=HOME=/var/lib/rss-to-matrix
+Environment=PYTHONUNBUFFERED=1
+WorkingDirectory=/var/lib/rss-to-matrix
+
+ExecStartPre=/opt/rss-to-matrix/.venv/bin/rss-to-matrix validate-config --config /etc/rss-to-matrix/config.toml
+ExecStart=/opt/rss-to-matrix/.venv/bin/rss-to-matrix --config /etc/rss-to-matrix/config.toml
+TimeoutStartSec=9min
+
+StateDirectory=rss-to-matrix
+StateDirectoryMode=0750
+UMask=0027
+
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectClock=true
+ProtectControlGroups=true
+ProtectHostname=true
+ProtectKernelLogs=true
+ProtectKernelModules=true
+ProtectKernelTunables=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+RestrictNamespaces=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+LockPersonality=true
+MemoryDenyWriteExecute=true
+CapabilityBoundingSet=
+AmbientCapabilities=
+ReadOnlyPaths=/etc/rss-to-matrix /opt/rss-to-matrix
+ReadWritePaths=/var/lib/rss-to-matrix
